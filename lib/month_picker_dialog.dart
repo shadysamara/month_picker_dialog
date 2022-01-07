@@ -28,15 +28,21 @@ Future<DateTime?> showMonthPicker({
       : await GlobalMaterialLocalizations.delegate.load(locale);
   assert(localizations != null);
   return await showDialog<DateTime>(
-    context: context,
-    builder: (context) => _MonthPickerDialog(
-      initialDate: initialDate,
-      firstDate: firstDate,
-      lastDate: lastDate,
-      locale: locale,
-      localizations: localizations,
-    ),
-  );
+      context: context,
+      builder: (context) => Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: const Color(0xFF8CE7F1),
+              colorScheme: ColorScheme.light(primary: const Color(0xFF8CE7F1)),
+              buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+            ),
+            child: _MonthPickerDialog(
+              initialDate: initialDate,
+              firstDate: firstDate,
+              lastDate: lastDate,
+              locale: locale,
+              localizations: localizations,
+            ),
+          ));
 }
 
 class _MonthPickerDialog extends StatefulWidget {
@@ -103,7 +109,11 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    var theme = Theme.of(context)
+      ..copyWith(
+          textTheme: TextTheme(
+              bodyText1: TextStyle(fontSize: 12),
+              bodyText2: TextStyle(fontSize: 12)));
     var locale = getLocale(context, selectedLocale: widget.locale);
     var header = buildHeader(theme, locale);
     var pager = buildPager(theme, locale);
@@ -115,8 +125,7 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
       color: theme.dialogBackgroundColor,
     );
     return Theme(
-      data:
-          Theme.of(context).copyWith(dialogBackgroundColor: Colors.transparent),
+      data: theme,
       child: Dialog(
         child: Column(
           mainAxisSize: MainAxisSize.min,
