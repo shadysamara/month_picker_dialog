@@ -9,7 +9,7 @@ import 'package:month_picker_dialog/src/common.dart';
 import 'package:month_picker_dialog/src/locale_utils.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// shady samara from gaza
+/// shady samara fro
 /// Displays month picker dialog.
 /// [initialDate] is the initially selected month.
 /// [firstDate] is the optional lower bound for month selection.
@@ -28,21 +28,15 @@ Future<DateTime?> showMonthPicker({
       : await GlobalMaterialLocalizations.delegate.load(locale);
   assert(localizations != null);
   return await showDialog<DateTime>(
-      context: context,
-      builder: (context) => Theme(
-            data: ThemeData.light().copyWith(
-              primaryColor: const Color(0xFF8CE7F1),
-              colorScheme: ColorScheme.light(primary: const Color(0xFF8CE7F1)),
-              buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
-            ),
-            child: _MonthPickerDialog(
-              initialDate: initialDate,
-              firstDate: firstDate,
-              lastDate: lastDate,
-              locale: locale,
-              localizations: localizations,
-            ),
-          ));
+    context: context,
+    builder: (context) => _MonthPickerDialog(
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+      locale: Locale('ar'),
+      localizations: localizations,
+    ),
+  );
 }
 
 class _MonthPickerDialog extends StatefulWidget {
@@ -97,7 +91,7 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
       firstDate: _firstDate,
       lastDate: _lastDate,
       onMonthSelected: _onMonthSelected,
-      locale: widget.locale,
+      locale: Locale('ar'),
     );
   }
 
@@ -109,14 +103,10 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context)
-      ..copyWith(
-          textTheme: TextTheme(
-              bodyText1: TextStyle(fontSize: 12),
-              bodyText2: TextStyle(fontSize: 12)));
+    var theme = ThemeData(textTheme: TextTheme());
     var locale = getLocale(context, selectedLocale: widget.locale);
-    var header = buildHeader(theme, locale);
-    var pager = buildPager(theme, locale);
+    var header = buildHeader(theme, 'ar');
+    var pager = buildPager(theme, 'ar');
     var content = Material(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -125,7 +115,8 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
       color: theme.dialogBackgroundColor,
     );
     return Theme(
-      data: theme,
+      data:
+          Theme.of(context).copyWith(dialogBackgroundColor: Colors.transparent),
       child: Dialog(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -156,11 +147,18 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
       children: <Widget>[
         FlatButton(
           onPressed: () => Navigator.pop(context, null),
-          child: Text('hgggg'),
+          child: Text(
+            'الغاء',
+            style:
+                TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic_bold'),
+          ),
         ),
         FlatButton(
           onPressed: () => Navigator.pop(context, selectedDate),
-          child: Text('jkhjkh'),
+          child: Text(
+            'موافق',
+            style: TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic'),
+          ),
         )
       ],
     );
