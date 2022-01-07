@@ -9,7 +9,7 @@ import 'package:month_picker_dialog/src/common.dart';
 import 'package:month_picker_dialog/src/locale_utils.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// shady samara from gaza shady 5
+/// shady samara from gaza shady 6
 /// Displays month picker dialog.
 /// [initialDate] is the initially selected month.
 /// [firstDate] is the optional lower bound for month selection.
@@ -103,7 +103,11 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = ThemeData(textTheme: TextTheme());
+    var theme = ThemeData(
+        textTheme: TextTheme(
+      bodyText1: TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic'),
+      bodyText2: TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic'),
+    ));
     var locale = getLocale(context, selectedLocale: widget.locale);
     var header = buildHeader(theme, 'ar');
     var pager = buildPager(theme, 'ar');
@@ -149,15 +153,15 @@ class _MonthPickerDialogState extends State<_MonthPickerDialog> {
           onPressed: () => Navigator.pop(context, null),
           child: Text(
             'الغاء',
-            style:
-                TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic_bold'),
+            style: TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic'),
           ),
         ),
         FlatButton(
           onPressed: () => Navigator.pop(context, selectedDate),
           child: Text(
             'موافق',
-            style: TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic'),
+            style:
+                TextStyle(fontSize: 15, fontFamily: 'Bahij_TheSansArabic_bold'),
           ),
         )
       ],
