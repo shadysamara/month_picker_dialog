@@ -9,7 +9,7 @@ import 'package:month_picker_dialog/src/common.dart';
 import 'package:month_picker_dialog/src/locale_utils.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// shady samara fro
+/// shady samara from gaza shady 5
 /// Displays month picker dialog.
 /// [initialDate] is the initially selected month.
 /// [firstDate] is the optional lower bound for month selection.
